@@ -1,20 +1,28 @@
 import {createSlice} from '@reduxjs/toolkit'
 
-const userSlice = createSlice({
+const initialState = {
+    name: null,
+    login: null,
+    followers: null,
+    public_repos: null,
+    image: null
+  }
+
+const userReducer = createSlice({
     name: 'users',
-    initialState:[],
+    initialState,
     reducers: {
         addUser:(state,action) => {
-          const {name, login, followers, publicrepos, avatar_url} = action.payload
-          state.push({ name, login, followers, publicrepos, avatar_url })
-        },
-        searchUser: (state,action) => {
-            const search = action.payload.toLowerCase()
-            return state.filter(user => user.login.toLowerCase())
+            const { login, name, followers, public_repos, avatar } = action.payload;
+            state.login = login;
+            state.name = name;
+            state.followers = followers;
+            state.publicRepos = public_repos;
+            state.avatar = avatar;
         }
     }
     
 })
 
-export const {addUser, searchUser} = userSlice.actions
-export default userSlice.reducer
+export const {addUser} = userReducer.actions
+export default userReducer.reducer
